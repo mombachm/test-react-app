@@ -1,22 +1,13 @@
-import React, { Props } from "react";
+import React from "react";
 
-interface State {
-  count: number;
+interface Props {
+  title: any
 }
 
-export class Title extends React.Component<any, State> {
-
-  constructor(props: any) {
-    super(props);
-    this.state = { count: 0 };
-
-    setTimeout(() => {
-      this.setState({count: this.state.count + 1});
-    }, 1000);
-  }
+export class Title extends React.Component<Props, {}> {
 
   render() {
-    return <h1>Kubernetes: {this.state.count}</h1>;
+    return <h1>Kubernetes: {this.props.title} </h1>;
   }
 
 }
