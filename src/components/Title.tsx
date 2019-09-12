@@ -5,11 +5,12 @@ interface Props {
 }
 
 interface Donation {
-  description: string
+  _id: string;
+  description: string;
 }
 
 interface State {
-  donations: Donation[]
+  donations: Donation[];
 }
 
 export const Title: React.FC = () => {
@@ -22,18 +23,25 @@ export const Title: React.FC = () => {
       const donations = res.data;
       setDonations(donations);
     });
-  }, []);
+  }, [ donations ]);
 
   function createDonation() {
-    debugger;
-    Axios.post(`http://localhost:4000/createDonation/`, {
+    Axios.post(`http://localhost:4000/createDonation`, {
       description: inputValue
     })
     .then(res => {
       const newDonations = res.data;
       setDonations([...donations, newDonations]);
+      setInputValue("");
     });
   };
+
+  function deleteDonation(id: string) {
+    Axios.post(`http://localhost:4000/deleteDonation`, {
+      id
+    })
+    .then(res => { });
+  }
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {
     const newValue = event.target.value;
@@ -43,9 +51,14 @@ export const Title: React.FC = () => {
   return (
     <>
       <ul>
-        { donations.map(donation => <li>{donation.description}</li>) }
+        { donations.map(donation => 
+          <tr>
+            <td>{donation.description}</td>
+            <td><button onClick={() => {deleteDonation(donation._id)}}>Delete</button></td>
+          </tr>
+        ) }
       </ul>
-      <input onChange={onInputChange}></input>
+      <input value={inputValue} onChange={onInputChange}></input>
       <button onClick={() => {createDonation()}}>Create Donation</button>
     </>
   );
