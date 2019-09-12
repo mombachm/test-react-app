@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Title } from './components/Title';
 import { Provider } from 'react-redux';
 import mainStore, { MainStore } from './store/Store';
@@ -12,12 +11,11 @@ class App extends Component<{}, MainStore> {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div>
+        <header>
           <p>
             <Provider store={mainStore}>
-              <Title title={this.state.title}/>
-              <Button title={this.state.title}/>
+              <Title/>
             </Provider>
           </p>
         </header>
