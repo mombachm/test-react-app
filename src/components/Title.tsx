@@ -1,16 +1,9 @@
 import React, { useState, useEffect, ChangeEvent, SyntheticEvent, FormEvent } from "react";
 import Axios from 'axios';
 
-interface Props {
-}
-
 interface Donation {
   _id: string;
   description: string;
-}
-
-interface State {
-  donations: Donation[];
 }
 
 export const Title: React.FC = () => {
